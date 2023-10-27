@@ -25,16 +25,16 @@ const DownloadAndShare: React.FC = () => {
             variant={"secondary"}
             size={"icon"}
           >
-            <MoreIcon className="h-6 w-6" />
+            <MoreIcon className="w-6 h-6" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" align="end">
           <DropdownMenuItem>
-            <DownloadIcon className="mr-2 h-5 w-5" />
+            <DownloadIcon className="w-5 h-5 mr-2" />
             Download all images
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <CopyIcon className="mr-2 h-5 w-5" />
+            <CopyIcon className="w-5 h-5 mr-2" />
             Copy link
           </DropdownMenuItem>
         </DropdownMenuContent>

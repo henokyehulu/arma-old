@@ -16,7 +16,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
   const logo = await api.logo.show.query({ id: params.id });
   if (!logo) notFound();
   return (
-    <div>
+    <div className="flex-1">
       <header className="flex items-center justify-between h-12 gap-4 px-4 -mx-4 -mt-8 border-b">
         <div className="flex-shrink-0">
           <GoBack />
@@ -59,17 +59,13 @@ const Page: NextPage<PageProps> = async ({ params }) => {
           </Button>
         </div>
       </header>
-      <main className="flex items-center h-screen -mx-4">
-        <div className="flex justify-center flex-1 w-full h-full p-10 bg-muted">
-          <div className="relative w-full h-full max-w-4xl aspect-square bg-muted-foreground">
-            <Image src={logo.url} alt="logo" fill className="object-cover" />
-          </div>
+      <main className="relative flex items-center justify-center px-4 py-20 -mx-4 bg-muted">
+        <div className="relative flex w-full max-w-3xl -mx-4 bg-white border aspect-video">
+          <Image src={logo.url} alt="logo" fill />
         </div>
-        {/* {showMetaData ? (
-          <div className="flex-shrink-0 h-full p-4 bg-white w-80">
-            Meta data
-          </div>
-        ) : null} */}
+        {/* <Button className="absolute bottom-4 right-4">
+          <RelatedIcon className="w-5 h-5 mr-2" /> See related logos
+        </Button> */}
       </main>
     </div>
   );

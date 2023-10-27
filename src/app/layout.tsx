@@ -32,9 +32,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="max-w-6xl mx-auto border-x">
+        <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
           <Header />
-          <main className="px-4 py-8 pb-20">
+          <main className="flex flex-col flex-1 px-4 py-8 pb-20">
             <TRPCReactProvider headers={headers()}>
               {children}
             </TRPCReactProvider>

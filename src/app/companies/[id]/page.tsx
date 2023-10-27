@@ -8,7 +8,7 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PiGlobeSimple as GlobeIcon } from "react-icons/pi";
+import { PiPlanet as GlobeIcon } from "react-icons/pi";
 
 interface PageProps {
   params: {
@@ -30,7 +30,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
               <Link
                 target="_blank"
                 href={company.website}
-                className={buttonVariants({ className: "!px-2.5" })}
+                className={buttonVariants({ class: "px-2.5" })}
               >
                 <div className="flex items-center gap-2">
                   <GlobeIcon className="w-5 h-5" />
