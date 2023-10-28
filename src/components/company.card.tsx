@@ -12,19 +12,16 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   return (
     <Link
       href={`/companies/${company.id}`}
-      className="asz group flex flex-col gap-4"
+      className="group flex flex-col gap-4 rounded-lg transition-all"
     >
-      <main className="group flex aspect-video rounded-lg bg-accent p-6 transition-all group-hover:bg-accent/50">
-        <div className="pointer-events-none relative h-full w-full rounded-lg bg-white">
-          {/* <Badge className="absolute z-10 -left-4 -top-2">New</Badge> */}
-          {company.avatar ? (
-            <Image
-              src={company.avatar}
-              alt={`${company.name}-avatar`}
-              fill
-              className="rounded-lg object-cover"
-            />
-          ) : null}
+      <main className="aspect-[16/10] rounded-lg bg-accent group-hover:bg-accent/75 md:p-8">
+        <div className="relative h-full rounded-lg border bg-white">
+          <Image
+            src={company.avatar ?? ""}
+            alt={`${company.name}-logo`}
+            fill
+            className="rounded-lg object-cover object-top"
+          />
         </div>
       </main>
       <footer className="flex items-center gap-2">

@@ -41,7 +41,7 @@ export default function RootLayout({
         >
           <div className="mx-auto flex min-h-screen max-w-6xl flex-col border-x">
             <Header />
-            <main className="flex flex-1 flex-col px-4 py-8 pb-20">
+            <main className="flex flex-1 flex-col border px-4 py-8 pb-20">
               <TRPCReactProvider headers={headers()}>
                 {children}
               </TRPCReactProvider>

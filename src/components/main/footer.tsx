@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex items-center justify-center px-4 py-8 text-center border-t">
+    <footer className="flex flex-shrink-0 items-center justify-center border-t px-4 py-8 text-center">
       <p className="text-sm text-muted-foreground">
         Built by{" "}
         <Link

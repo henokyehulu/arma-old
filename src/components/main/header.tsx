@@ -9,7 +9,7 @@ import ModeToggle from "../mode.toggle";
 
 const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b bg-background/75 px-4 backdrop-blur-lg">
+    <header className="sticky top-0 z-20 flex h-14 flex-shrink-0 items-center justify-between gap-4 border-b bg-background/75 px-4 backdrop-blur-lg">
       <div>
         <Link
           href={"/"}
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
           </Badge>
         </Link>
       </div>
-      <div className="flex flex-1 items-center justify-center">
+      <div className="hidden flex-1 items-center justify-center md:flex">
         <Input placeholder="Search..." className="max-w-sm" />
       </div>
       <div className="flex items-center gap-2">

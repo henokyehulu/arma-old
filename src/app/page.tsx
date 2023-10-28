@@ -8,7 +8,7 @@ export default async function Home() {
       <div className="pb-4">
         <h1 className="text-4xl font-bold">Browse</h1>
       </div>
-      <div className="grid gap-12 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         {companies.map((company) => (
           <CompanyCard key={company.name} company={company} />
         ))}

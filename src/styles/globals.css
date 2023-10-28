@@ -67,6 +67,10 @@
 }
 
 @layer base {
+  html,
+  body {
+    min-height: 100vh;
+  }
   * {
     @apply border-border;
   }
