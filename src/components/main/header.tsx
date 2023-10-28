@@ -1,18 +1,15 @@
 import Link from "next/link";
 import React from "react";
 import { PiFlagBannerDuotone as FlagIcon } from "react-icons/pi";
-import {
-  RiGithubFill as GithubIcon,
-  RiSunLine as LightModeIcon,
-  RiTwitterXLine,
-} from "react-icons/ri";
+import { RiGithubFill as GithubIcon, RiTwitterXLine } from "react-icons/ri";
 import { Badge } from "../ui/badge";
 import { Button, buttonVariants } from "../ui/button";
 import { Input } from "../ui/input";
+import ModeToggle from "../mode.toggle";
 
 const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-20 flex items-center justify-between gap-4 px-4 border-b h-14 bg-white/75 backdrop-blur-lg">
+    <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b bg-background/75 px-4 backdrop-blur-lg">
       <div>
         <Link
           href={"/"}
@@ -21,14 +18,14 @@ const Header: React.FC = () => {
             class: "px-0 hover:bg-transparent",
           })}
         >
-          <FlagIcon className="w-5 h-5 mr-1 text-primary" />
+          <FlagIcon className="mr-1 h-5 w-5 text-primary" />
           Arma
-          <Badge variant={"secondary"} className="ml-1 text-xs rounded">
+          <Badge variant={"secondary"} className="ml-1 rounded text-xs">
             Alpha
           </Badge>
         </Link>
       </div>
-      <div className="flex items-center justify-center flex-1">
+      <div className="flex flex-1 items-center justify-center">
         <Input placeholder="Search..." className="max-w-sm" />
       </div>
       <div className="flex items-center gap-2">
@@ -62,14 +59,12 @@ const Header: React.FC = () => {
         </DropdownMenu> */}
 
         <Button size={"icon"} variant={"ghost"}>
-          <GithubIcon className="w-5 h-5" />
+          <GithubIcon className="h-5 w-5" />
         </Button>
         <Button size={"icon"} variant={"ghost"}>
-          <RiTwitterXLine className="w-5 h-5" />
+          <RiTwitterXLine className="h-5 w-5" />
         </Button>
-        <Button size={"icon"} variant={"ghost"}>
-          <LightModeIcon className="w-5 h-5" />
-        </Button>
+        <ModeToggle />
       </div>
     </header>
   );

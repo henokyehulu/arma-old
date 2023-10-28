@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,15 +33,22 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
-          <Header />
-          <main className="flex flex-col flex-1 px-4 py-8 pb-20">
-            <TRPCReactProvider headers={headers()}>
-              {children}
-            </TRPCReactProvider>
-          </main>
-          <Footer />
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="mx-auto flex min-h-screen max-w-6xl flex-col border-x">
+            <Header />
+            <main className="flex flex-1 flex-col px-4 py-8 pb-20">
+              <TRPCReactProvider headers={headers()}>
+                {children}
+              </TRPCReactProvider>
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

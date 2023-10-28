@@ -33,7 +33,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                 className={buttonVariants({ class: "px-2.5" })}
               >
                 <div className="flex items-center gap-2">
-                  <GlobeIcon className="w-5 h-5" />
+                  <GlobeIcon className="h-5 w-5" />
                   <div className="flex flex-col leading-3">
                     <p className="text-[8px]">Visit</p>
                     <h5 className="text-sm leading-3">{company.name}</h5>
@@ -50,10 +50,10 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                 src={company.avatar}
                 alt={`${company.name}-avatar`}
                 fill
-                className="object-cover rounded-lg"
+                className="rounded-lg object-cover"
               />
             ) : (
-              <p className="font-bold text-8xl">{company.name.slice(0, 1)}</p>
+              <p className="text-8xl font-bold">{company.name.slice(0, 1)}</p>
             )}
           </div>
           <h1 className="text-4xl font-bold">{company.name}</h1>
@@ -64,7 +64,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
             &copy; {company.legalName}
           </span>
           {company.category ? (
-            <div className="flex flex-col items-center justify-center gap-4 p-4 border rounded-lg">
+            <div className="flex flex-col items-center justify-center gap-4 rounded-lg border p-4">
               <h4 className="text-sm font-medium">Company category</h4>
               <Link
                 href={`/categories/${company.category.slug}`}
