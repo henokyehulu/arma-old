@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -33,15 +37,24 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <NextSSRPlugin
+          /**
+           * The `extractRouterConfig` will extract **only** the route configs
+           * from the router to prevent additional information from being
+           * leaked to the client. The data passed to the client is the same
+           * as if you were to fetch `/api/uploadthing` directly.
+           */
+          routerConfig={extractRouterConfig(ourFileRouter)}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <div className="mx-auto flex min-h-screen max-w-6xl flex-col border-x">
+          <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
             <Header />
-            <main className="flex flex-1 flex-col border px-4 py-8 pb-20">
+            <main className="flex flex-col flex-1 px-4 py-8 pb-20">
               <TRPCReactProvider headers={headers()}>
                 {children}
               </TRPCReactProvider>

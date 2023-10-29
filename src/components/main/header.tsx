@@ -9,23 +9,23 @@ import ModeToggle from "../mode.toggle";
 
 const Header: React.FC = () => {
   return (
-    <header className="sticky top-0 z-20 flex h-14 flex-shrink-0 items-center justify-between gap-4 border-b bg-background/75 px-4 backdrop-blur-lg">
+    <header className="sticky top-0 z-20 flex items-center justify-between flex-shrink-0 gap-4 px-4 border-b h-14 bg-background/75 backdrop-blur-lg">
       <div>
         <Link
           href={"/"}
           className={buttonVariants({
             variant: "ghost",
-            class: "px-0 hover:bg-transparent",
+            class: "!px-0 hover:bg-transparent",
           })}
         >
-          <FlagIcon className="mr-1 h-5 w-5 text-primary" />
+          <FlagIcon className="w-5 h-5 mr-1 text-primary" />
           Arma
-          <Badge variant={"secondary"} className="ml-1 rounded text-xs">
+          <Badge variant={"secondary"} className="ml-1 text-xs rounded">
             Alpha
           </Badge>
         </Link>
       </div>
-      <div className="hidden flex-1 items-center justify-center md:flex">
+      <div className="items-center justify-center flex-1 hidden md:flex">
         <Input placeholder="Search..." className="max-w-sm" />
       </div>
       <div className="flex items-center gap-2">
@@ -58,11 +58,14 @@ const Header: React.FC = () => {
           </DropdownMenuContent>
         </DropdownMenu> */}
 
+        <Link href={"/contribute"} className={buttonVariants()}>
+          Upload
+        </Link>
         <Button size={"icon"} variant={"ghost"}>
-          <GithubIcon className="h-5 w-5" />
+          <GithubIcon className="w-5 h-5" />
         </Button>
         <Button size={"icon"} variant={"ghost"}>
-          <RiTwitterXLine className="h-5 w-5" />
+          <RiTwitterXLine className="w-5 h-5" />
         </Button>
         <ModeToggle />
       </div>
