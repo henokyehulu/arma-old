@@ -1,20 +1,13 @@
-"use client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { PiArrowDown as DownIcon } from "react-icons/pi";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { UploadDropzone } from "@/utils/uploadthing";
+// import { UploadDropzone } from "@/utils/uploadthing";
 import type { NextPage } from "next";
+import { PiArrowDown as DownIcon } from "react-icons/pi";
+import CategorySelect from "./_components/category.select";
 
-const Page: NextPage = ({}) => {
+const Page: NextPage = () => {
   return (
     <div className="flex flex-col gap-12">
       <div className="flex flex-col items-center justify-center gap-8 text-center">
@@ -38,16 +31,7 @@ const Page: NextPage = ({}) => {
       <form className="mx-auto flex w-full max-w-xl flex-col gap-4 rounded-lg p-8">
         <div className="space-y-2">
           <Label htmlFor="category">Company category</Label>
-          <Select>
-            <SelectTrigger className="">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Category #1</SelectItem>
-              <SelectItem value="dark">Category #2</SelectItem>
-              <SelectItem value="system">Category #3</SelectItem>
-            </SelectContent>
-          </Select>
+          <CategorySelect />
         </div>
         <div className="space-y-2">
           <Label htmlFor="name">Company name</Label>
@@ -71,7 +55,7 @@ const Page: NextPage = ({}) => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="logos">Company logos</Label>
-          <UploadDropzone
+          {/* <UploadDropzone
             endpoint="imageUploader"
             onClientUploadComplete={(res) => {
               // Do something with the response
@@ -82,7 +66,7 @@ const Page: NextPage = ({}) => {
               // Do something with the error.
               alert(`ERROR! ${error.message}`);
             }}
-          />
+          /> */}
         </div>
         <Button>Submit for review</Button>
       </form>

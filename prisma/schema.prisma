@@ -46,10 +46,12 @@ model Category {
 }
 
 model Logo {
-    id        String  @id @default(uuid())
+    id        String   @id @default(uuid())
     url       String
     companyId String
-    company   Company @relation(fields: [companyId], references: [id])
+    company   Company  @relation(fields: [companyId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@index([companyId])
 }

@@ -5,6 +5,14 @@ export const companyRouter = createTRPCRouter({
   index: publicProcedure.query(({ ctx }) => {
     return ctx.db.company.findMany({
       orderBy: { createdAt: "desc" },
+      include: {
+        logos: {
+          orderBy: {
+            createdAt: "desc",
+          },
+          take: 4,
+        },
+      },
     });
   }),
   show: publicProcedure

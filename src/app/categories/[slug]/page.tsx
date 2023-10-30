@@ -1,4 +1,5 @@
 import CompanyCard from "@/components/company.card";
+import { buttonVariants } from "@/components/ui/button";
 import { api } from "@/trpc/server";
 import type { NextPage } from "next";
 import Link from "next/link";
@@ -16,7 +17,13 @@ const Page: NextPage<PageProps> = async ({ params }) => {
   return (
     <main className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 pb-4">
-        <Link href={"/categories"} className="font-medium hover:underline">
+        <Link
+          href={"/categories"}
+          className={buttonVariants({
+            variant: "link",
+            class: "h-fit w-fit !p-0",
+          })}
+        >
           Company Categories
         </Link>
         <h1 className="text-4xl font-bold">Browse</h1>

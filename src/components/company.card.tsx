@@ -1,47 +1,47 @@
-import type { Company } from "@prisma/client";
+import type { Company, Logo } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 interface CompanyCardProps {
-  company: Company;
+  company: Company & { logos: Logo[] };
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   return (
     <Link
       href={`/companies/${company.id}`}
-      className="flex flex-col gap-4 transition-all rounded-lg group"
+      className="group flex flex-col gap-4 rounded-lg transition-all"
     >
       <main className="aspect-[16/10] rounded-lg bg-accent group-hover:bg-accent/75 md:p-8">
-        <div className="relative h-full bg-white border rounded-lg">
+        <div className="relative h-full rounded-lg border bg-white">
           <Image
-            src={company.avatar ?? ""}
+            src={company.logos[0]?.url ?? ""}
             alt={`${company.name}-logo`}
             fill
-            className="object-cover object-top rounded-lg"
+            className="rounded-lg object-cover object-top"
           />
         </div>
       </main>
       <footer className="flex items-center gap-2">
-        <div className="flex items-center flex-1 gap-4">
-          <div className="relative flex items-center justify-center flex-shrink-0 w-10 h-10 overflow-hidden border rounded-md pointer-events-none">
+        <div className="flex flex-1 items-center gap-4">
+          <div className="pointer-events-none relative flex h-10 w-10 flex-shrink-0 items-center justify-center overflow-hidden rounded-md border">
             {company.avatar ? (
               <Image
                 src={company.avatar}
                 alt={`${company.name}-avatar`}
                 fill
-                className="object-cover rounded-lg"
+                className="rounded-lg object-cover"
               />
             ) : (
               <p className="text-xl font-bold">{company.name.slice(0, 1)}</p>
             )}
           </div>
           <div className="leading-5">
-            <h4 className="font-medium line-clamp-1 group-hover:underline">
+            <h4 className="line-clamp-1 font-medium group-hover:underline">
               {company.name}
             </h4>
-            <p className="text-sm line-clamp-1 text-muted-foreground">
+            <p className="line-clamp-1 text-sm text-muted-foreground">
               {company.motto}
             </p>
           </div>

@@ -4,7 +4,7 @@ import { z } from "zod";
 export const categoryRouter = createTRPCRouter({
   index: publicProcedure.query(({ ctx }) => {
     return ctx.db.category.findMany({
-      orderBy: { createdAt: "desc" },
+      orderBy: { name: "asc" },
     });
   }),
   show: publicProcedure
@@ -19,7 +19,11 @@ export const categoryRouter = createTRPCRouter({
           slug: input.slug,
         },
         include: {
-          companies: true,
+          companies: {
+            include: {
+              logos: true,
+            },
+          },
           _count: true,
         },
       });
