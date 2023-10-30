@@ -16,18 +16,18 @@ const NotFound: NextPage = () => {
   const category = toTitle(slug as string);
   return (
     <div className="flex flex-col items-center justify-center pt-20">
-      <div className="mx-auto flex max-w-sm flex-col gap-4">
+      <div className="flex flex-col max-w-sm gap-4 mx-auto">
         <form className="flex flex-col gap-4">
           <div className="space-y-4">
             <Label htmlFor="name" className="flex flex-col gap-2 text-left">
               <h1 className="text-xl font-medium">
                 Category{" "}
-                <span className="text-muted-foreground">{category}</span> not
-                found.
+                <span className="text-muted-foreground">{category}</span> was
+                not found.
               </h1>
               <p className="text-sm text-muted-foreground">
-                If you think this category should be added to our list click the
-                button down below.
+                If you think this category should be added to our list, click
+                the button below.
               </p>
             </Label>
             <Input
