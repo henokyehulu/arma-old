@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/main/loader";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -18,7 +19,6 @@ import * as React from "react";
 import {
   PiCaretUpDown as CaretSortIcon,
   PiCheck as CheckIcon,
-  PiSpinner as LoadingIcon,
 } from "react-icons/pi";
 
 const CategorySelect: React.FC = () => {
@@ -45,13 +45,13 @@ const CategorySelect: React.FC = () => {
             ? categories?.find((category) => category.name === value)?.name
             : "Select a category..."}
           {isLoading ? (
-            <LoadingIcon className="h-4 w-4 shrink-0 animate-spin" />
+            <Loader className="w-4 h-4" />
           ) : (
-            <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <CaretSortIcon className="w-4 h-4 ml-2 opacity-50 shrink-0" />
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="PopoverContent p-0">
+      <PopoverContent className="p-0 PopoverContent">
         <Command>
           <CommandInput placeholder="Search category..." />
           <CommandEmpty>No categories found.</CommandEmpty>

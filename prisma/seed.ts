@@ -6,18 +6,22 @@ async function main() {
       {
         name: "Business",
         slug: "business",
+        status: "PUBLISHED",
       },
       {
         name: "Productivity",
         slug: "productivity",
+        status: "PUBLISHED",
       },
       {
         name: "Social Networking",
         slug: "social-networking",
+        status: "PUBLISHED",
       },
       {
         name: "Artificial Intelligence",
         slug: "artificial-intelligence",
+        status: "PUBLISHED",
       },
     ],
   });

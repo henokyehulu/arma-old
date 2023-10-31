@@ -1,9 +1,11 @@
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { SCreateCategory } from "@/types/form";
 import { z } from "zod";
 
 export const categoryRouter = createTRPCRouter({
   index: publicProcedure.query(({ ctx }) => {
     return ctx.db.category.findMany({
+      where: { status: "PUBLISHED" },
       orderBy: { name: "asc" },
     });
   }),
@@ -17,6 +19,9 @@ export const categoryRouter = createTRPCRouter({
       return ctx.db.category.findUnique({
         where: {
           slug: input.slug,
+          status: {
+            in: ["PUBLISHED", "PENDING"],
+          },
         },
         include: {
           companies: {
@@ -28,4 +33,9 @@ export const categoryRouter = createTRPCRouter({
         },
       });
     }),
+  create: publicProcedure.input(SCreateCategory).mutation(({ input, ctx }) => {
+    return ctx.db.category.create({
+      data: { ...input },
+    });
+  }),
 });
