@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/main/loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,14 +7,25 @@ import { api } from "@/trpc/react";
 import { SCreateCategory, type TCreateCategory } from "@/types/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { NextPage } from "next";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 
 const NotFound: NextPage = () => {
+  const router = useRouter();
   const { slug } = useParams();
-  const { mutateAsync, isLoading } = api.category.create.useMutation();
+  const { mutate, isLoading } = api.category.create.useMutation({
+    onSuccess: (data) => {
+      toast.success(
+        `Hopfully ${data.name} will be added soon to our category list.`,
+      );
+      router.refresh();
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
   const toTitle = (slug: string) =>
     slug
       .toLowerCase()
@@ -52,12 +64,7 @@ const NotFound: NextPage = () => {
     return () => subscription.unsubscribe();
   }, [setValue, watch]);
   const onSubmit: SubmitHandler<TCreateCategory> = (data) => {
-    toast.promise(mutateAsync(data), {
-      loading: "Loading...",
-      success: (data) =>
-        `Hopfully ${data.name} will be added soon to our category list.`,
-      error: () => `Error!`,
-    });
+    mutate(data);
   };
   return (
     <div className="flex flex-col items-center justify-center pt-20">
@@ -86,7 +93,7 @@ const NotFound: NextPage = () => {
             {errors.name && errors.name.types && <p>{errors.name.message}</p>}
           </div>
           <Button disabled={isLoading} type="submit">
-            Submit for review
+            {isLoading ? <Loader /> : "Submit for review"}
           </Button>
         </form>
       </div>

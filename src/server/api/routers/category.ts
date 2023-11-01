@@ -1,5 +1,6 @@
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { SCreateCategory } from "@/types/form";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const categoryRouter = createTRPCRouter({
@@ -33,9 +34,41 @@ export const categoryRouter = createTRPCRouter({
         },
       });
     }),
-  create: publicProcedure.input(SCreateCategory).mutation(({ input, ctx }) => {
-    return ctx.db.category.create({
-      data: { ...input },
-    });
-  }),
+  create: publicProcedure
+    .input(SCreateCategory)
+    .mutation(async ({ input, ctx }) => {
+      const category = await ctx.db.category.findUnique({
+        where: {
+          name: input.name,
+        },
+      });
+      if (category)
+        switch (category.status) {
+          case "PUBLISHED":
+            throw new TRPCError({
+              code: "CONFLICT",
+              message: "Category already exists.",
+            });
+            break;
+
+          case "PENDING":
+            throw new TRPCError({
+              code: "CONFLICT",
+              message: "We are reviewing this category suggestion.",
+            });
+
+            break;
+
+          default:
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: "An error has occured please try again later.",
+            });
+            break;
+        }
+      else
+        return ctx.db.category.create({
+          data: { ...input },
+        });
+    }),
 });
