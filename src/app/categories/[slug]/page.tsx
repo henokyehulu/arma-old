@@ -2,6 +2,7 @@ import CompanyCard from "@/components/company.card";
 import Date from "@/components/main/date";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { api } from "@/trpc/server";
 import type { NextPage } from "next";
 import Link from "next/link";
@@ -20,7 +21,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
     <>
       {category.status === "PENDING" ? (
         <div className="flex flex-col items-center justify-center pt-20">
-          <div className="flex flex-col max-w-sm gap-4 mx-auto">
+          <div className="mx-auto flex max-w-sm flex-col gap-4">
             <h1 className="text-xl font-medium">Category is under review.</h1>
             <div className="flex items-center gap-2">
               <p className="text-sm text-muted-foreground">Submitted on</p>
@@ -34,7 +35,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
               searching for a different category or check back later when the
               review is done.
             </p>
-            <Link href={"/categories"} className={buttonVariants({})}>
+            <Link href={"/categories"} className={cn(buttonVariants())}>
               View all categories
             </Link>
           </div>
@@ -44,10 +45,10 @@ const Page: NextPage<PageProps> = async ({ params }) => {
           <div className="flex flex-col gap-2 pb-4">
             <Link
               href={"/categories"}
-              className={buttonVariants({
-                variant: "link",
-                class: "h-fit w-fit !p-0",
-              })}
+              className={cn(
+                buttonVariants({ variant: "link" }),
+                "h-fit w-fit p-0",
+              )}
             >
               Company Categories
             </Link>

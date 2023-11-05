@@ -6,6 +6,7 @@ import { Badge } from "../ui/badge";
 import { Button, buttonVariants } from "../ui/button";
 import { Input } from "../ui/input";
 import ModeToggle from "../mode.toggle";
+import { cn } from "@/lib/utils";
 
 const Header: React.FC = () => {
   return (
@@ -13,10 +14,10 @@ const Header: React.FC = () => {
       <div>
         <Link
           href={"/"}
-          className={buttonVariants({
-            variant: "ghost",
-            class: "!p-0 hover:bg-transparent",
-          })}
+          className={cn(
+            buttonVariants({ variant: "ghost" }),
+            "p-0 hover:bg-transparent",
+          )}
         >
           <FlagIcon className="mr-1 h-5 w-5 text-primary" />
           Arma
@@ -58,7 +59,7 @@ const Header: React.FC = () => {
           </DropdownMenuContent>
         </DropdownMenu> */}
 
-        <Link href={"/contribute"} className={buttonVariants()}>
+        <Link href={"/contribute"} className={cn(buttonVariants())}>
           Upload
         </Link>
         <Button size={"icon"} variant={"ghost"}>

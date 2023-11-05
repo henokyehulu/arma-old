@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -54,9 +54,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Toaster />
-          <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
+          <div className="mx-auto flex min-h-screen max-w-6xl flex-col border-x">
             <Header />
-            <main className="flex flex-col flex-1 px-4 py-8 pb-20">
+            <main className="flex flex-1 flex-col px-4 py-8 pb-20">
               <TRPCReactProvider headers={headers()}>
                 {children}
               </TRPCReactProvider>

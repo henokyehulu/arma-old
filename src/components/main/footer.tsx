@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 const Footer: React.FC = () => {
   return (
@@ -10,7 +11,7 @@ const Footer: React.FC = () => {
         <Link
           target="_blank"
           href={"https://x.com/uglyhenok"}
-          className={buttonVariants({ variant: "link", class: "h-fit !p-0" })}
+          className={cn(buttonVariants({ variant: "link" }), "h-fit p-0")}
         >
           Henok Yehulu
         </Link>
@@ -18,7 +19,7 @@ const Footer: React.FC = () => {
         <Link
           target="_blank"
           href={"https://github.com/henokyehulu/arma"}
-          className={buttonVariants({ variant: "link", class: "h-fit !p-0" })}
+          className={cn(buttonVariants({ variant: "link" }), "h-fit p-0")}
         >
           GitHub
         </Link>
