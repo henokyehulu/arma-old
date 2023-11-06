@@ -9,14 +9,14 @@ const Loading = () => {
           <Skeleton className="h-9 w-9" />
           <div className="flex items-center gap-2">
             <Skeleton className="h-9 w-9" />
-            <Skeleton className="h-9 w-32" />
+            <Skeleton className="h-9 w-24" />
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-8 text-center">
           <Skeleton className="h-[140px] w-[140px] rounded-lg" />
-          <Skeleton className="h-[40px] w-1/5" />
-          <Skeleton className="h-[20px] w-1/4 rounded-lg" />
-          <Skeleton className="h-[20px] w-1/12 rounded-lg" />
+          <Skeleton className="h-[40px] w-1/2 md:w-1/5" />
+          <Skeleton className="h-[20px] w-3/4 rounded-lg md:w-1/4" />
+          <Skeleton className="h-[20px] w-1/3 rounded-lg md:w-1/12" />
           <Skeleton className="h-[80px] w-[160px] rounded-lg border" />
         </div>
       </header>
