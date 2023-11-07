@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-shrink-0 items-center justify-center border-t px-4 py-8 text-center">
+    <footer className="flex items-center justify-center flex-shrink-0 px-4 py-8 text-center border-t">
       <p className="text-sm text-muted-foreground">
         Built by{" "}
         <Link

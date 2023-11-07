@@ -3,11 +3,11 @@ import "@/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { headers } from "next/headers";
 
-import { TRPCReactProvider } from "@/trpc/react";
-import { cn } from "@/lib/utils";
-import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
+import Header from "@/components/main/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
+import { TRPCReactProvider } from "@/trpc/react";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 

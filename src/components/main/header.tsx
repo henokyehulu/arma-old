@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import type { Category, Company } from "@prisma/client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import type { IconType } from "react-icons/lib";
@@ -85,7 +84,7 @@ const Header: React.FC = () => {
           )}
         >
           <FlagIcon className="w-5 h-5 mr-1 text-primary" />
-          <span className="hidden sm:block">Arma</span>
+          Arma
           <Badge
             variant={"secondary"}
             className="ml-1 text-xs font-medium rounded"
@@ -94,7 +93,7 @@ const Header: React.FC = () => {
           </Badge>
         </Link>
       </div>
-      <div className="flex items-center justify-end flex-1 md:justify-center">
+      <div className="flex items-center justify-center flex-1">
         <SearchDialog
           open={openSearchDialog}
           setOpen={setOpenSearchDialog}
@@ -103,8 +102,8 @@ const Header: React.FC = () => {
         />
         {/* <Input placeholder="Search..." className="max-w-sm" /> */}
       </div>
+      <ModeToggle />
       <div className="items-center hidden gap-2 md:flex">
-        <ModeToggle />
         <HeaderMenu links={links} socials={socials} />
       </div>
     </header>
