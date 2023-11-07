@@ -8,6 +8,13 @@ export const categoryRouter = createTRPCRouter({
     return ctx.db.category.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { name: "asc" },
+      include: {
+        _count: {
+          select: {
+            companies: true,
+          },
+        },
+      },
     });
   }),
   show: publicProcedure

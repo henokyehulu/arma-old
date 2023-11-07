@@ -1,4 +1,11 @@
+import Link from "next/link";
 import React from "react";
+import {
+  PiArrowUpRight as ExternalLinkIcon,
+  PiList as MenuIcon,
+} from "react-icons/pi";
+import type { LinkProps } from "./main/header";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,67 +13,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
-import type { IconType } from "react-icons/lib";
-import {
-  RiGithubFill as GithubIcon,
-  RiTwitterXLine as XIcon,
-} from "react-icons/ri";
-import {
-  PiArrowUpRight as ExternalLinkIcon,
-  PiList as MenuIcon,
-  PiUploadSimple as UploadIcon,
-  PiSquaresFour as BrowseIcon,
-} from "react-icons/pi";
-import Link from "next/link";
 
-interface LinkProps {
-  icon: IconType;
-  label: string;
-  path: string;
-  isExternalLink?: boolean;
+interface HeaderMenuProps {
+  links?: LinkProps[];
+  socials?: LinkProps[];
 }
 
-const links: LinkProps[] = [
-  {
-    icon: BrowseIcon,
-    label: "Browse",
-    path: "/",
-  },
-  {
-    icon: UploadIcon,
-    label: "Upload",
-    path: "/contribute",
-  },
-  //   {
-  //     icon: GithubIcon,
-  //     label: "Github",
-  //     path: "/",
-  //     isExternalLink: true,
-  //   },
-  //   {
-  //     icon: XIcon,
-  //     label: "Twitter",
-  //     path: "/",
-  //     isExternalLink: true,
-  //   },
-];
-const socials: LinkProps[] = [
-  {
-    icon: GithubIcon,
-    label: "Github",
-    path: "/",
-    isExternalLink: true,
-  },
-  {
-    icon: XIcon,
-    label: "Twitter",
-    path: "/",
-    isExternalLink: true,
-  },
-];
-
-const HeaderMenu: React.FC = () => {
+const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -75,7 +28,7 @@ const HeaderMenu: React.FC = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end">
-        {links.map((link) => (
+        {links?.map((link) => (
           <DropdownMenuItem key={link.label} asChild>
             <Link
               href={link.path}
@@ -94,7 +47,7 @@ const HeaderMenu: React.FC = () => {
         ))}
         <DropdownMenuSeparator />
         <div className="grid grid-cols-1">
-          {socials.map((social) => (
+          {socials?.map((social) => (
             <DropdownMenuItem key={social.label} asChild>
               <Link
                 href={social.path}

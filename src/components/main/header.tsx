@@ -1,13 +1,79 @@
+"use client";
 import { cn } from "@/lib/utils";
+import type { Category, Company } from "@prisma/client";
 import Link from "next/link";
-import React from "react";
-import { PiFlagBannerDuotone as FlagIcon } from "react-icons/pi";
+import React, { useEffect, useState } from "react";
+import type { IconType } from "react-icons/lib";
+import {
+  PiSquaresFour as BrowseIcon,
+  PiFlagBannerDuotone as FlagIcon,
+  PiUploadSimple as UploadIcon,
+} from "react-icons/pi";
+import {
+  RiGithubFill as GithubIcon,
+  RiTwitterXLine as XIcon,
+} from "react-icons/ri";
 import HeaderMenu from "../header.menu";
 import ModeToggle from "../mode.toggle";
 import { Badge } from "../ui/badge";
 import { buttonVariants } from "../ui/button";
+import SearchDialog from "./search.dialog";
 
-const Header: React.FC = () => {
+export interface LinkProps {
+  icon: IconType;
+  label: string;
+  path: string;
+  isExternalLink?: boolean;
+}
+
+const links: LinkProps[] = [
+  {
+    icon: BrowseIcon,
+    label: "Browse",
+    path: "/",
+  },
+  {
+    icon: UploadIcon,
+    label: "Upload",
+    path: "/contribute",
+  },
+];
+const socials: LinkProps[] = [
+  {
+    icon: GithubIcon,
+    label: "Github",
+    path: "https://github.com/henokyehulu/arma",
+    isExternalLink: true,
+  },
+  {
+    icon: XIcon,
+    label: "Twitter",
+    path: "https://x.com/henokyehulu",
+    isExternalLink: true,
+  },
+];
+
+interface HeaderProps {
+  categories: ({
+    _count: {
+      companies: number;
+    };
+  } & Category)[];
+  companies: Company[];
+}
+const Header: React.FC<HeaderProps> = ({ categories, companies }) => {
+  const [openSearchDialog, setOpenSearchDialog] = useState(false);
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpenSearchDialog((openSearchDialog) => !openSearchDialog);
+      }
+    };
+
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
   return (
     <header className="sticky top-0 z-20 flex items-center justify-between flex-shrink-0 gap-4 px-4 border-b h-14 bg-background/75 backdrop-blur-lg">
       <div>
@@ -19,7 +85,7 @@ const Header: React.FC = () => {
           )}
         >
           <FlagIcon className="w-5 h-5 mr-1 text-primary" />
-          Arma
+          <span className="hidden sm:block">Arma</span>
           <Badge
             variant={"secondary"}
             className="ml-1 text-xs font-medium rounded"
@@ -28,41 +94,20 @@ const Header: React.FC = () => {
           </Badge>
         </Link>
       </div>
-      {/* <div className="items-center justify-center flex-1 hidden md:flex">
-        <Input placeholder="Search..." className="max-w-sm" />
-      </div> */}
-      <div className="flex items-center gap-2">
-        {/* <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button size={"icon"} variant={"ghost"}>
-              <MenuIcon className="w-5 h-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent side="bottom" align="end" className="w-40">
-            <DropdownMenuItem>Changelog</DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link
-                target="_blank"
-                href={"https://github.com/henokyehulu/arma"}
-                className="flex items-center justify-between cursor-pointer"
-              >
-                Github <ExternalLinkIcon className="w-5 h-5" />
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link
-                target="_blank"
-                href={"https://x.com/henokyehulu"}
-                className="flex items-center justify-between cursor-pointer"
-              >
-                X <ExternalLinkIcon className="w-5 h-5" />
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu> */}
-
+      <div className="flex items-center justify-end flex-1 md:justify-center">
+        <SearchDialog
+          open={openSearchDialog}
+          setOpen={setOpenSearchDialog}
+          links={links}
+          socials={socials}
+          categories={categories}
+          companies={companies}
+        />
+        {/* <Input placeholder="Search..." className="max-w-sm" /> */}
+      </div>
+      <div className="items-center hidden gap-2 md:flex">
         <ModeToggle />
-        <HeaderMenu />
+        <HeaderMenu links={links} socials={socials} />
       </div>
     </header>
   );
