@@ -53,15 +53,15 @@ const socials: LinkProps[] = [
   },
 ];
 
-interface HeaderProps {
-  categories: ({
-    _count: {
-      companies: number;
-    };
-  } & Category)[];
-  companies: Company[];
-}
-const Header: React.FC<HeaderProps> = ({ categories, companies }) => {
+// interface HeaderProps {
+// categories: ({
+//   _count: {
+//     companies: number;
+//   };
+// } & Category)[];
+// companies: Company[];
+// }
+const Header: React.FC = () => {
   const [openSearchDialog, setOpenSearchDialog] = useState(false);
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -100,8 +100,6 @@ const Header: React.FC<HeaderProps> = ({ categories, companies }) => {
           setOpen={setOpenSearchDialog}
           links={links}
           socials={socials}
-          categories={categories}
-          companies={companies}
         />
         {/* <Input placeholder="Search..." className="max-w-sm" /> */}
       </div>

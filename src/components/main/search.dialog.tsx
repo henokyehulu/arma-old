@@ -25,12 +25,12 @@ interface SearchDialogProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   links?: LinkProps[];
   socials?: LinkProps[];
-  categories?: ({
-    _count: {
-      companies: number;
-    };
-  } & Category)[];
-  companies: Company[];
+  // categories?: ({
+  //   _count: {
+  //     companies: number;
+  //   };
+  // } & Category)[];
+  // companies: Company[];
 }
 
 const SearchDialog: React.FC<SearchDialogProps> = ({
@@ -38,8 +38,8 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
   setOpen,
   links,
   socials,
-  categories,
-  companies,
+  // categories,
+  // companies,
 }) => {
   const router = useRouter();
   const runCommand = useCallback(
@@ -49,6 +49,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
     },
     [setOpen],
   );
+
   return (
     <div className="flex w-full max-w-md">
       <Button
@@ -86,7 +87,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
               </CommandItem>
             ))}
           </CommandGroup>
-          <CommandGroup heading="Companies">
+          {/* <CommandGroup heading="Companies">
             {companies?.map((company) => (
               <CommandItem
                 key={company.id}
@@ -103,9 +104,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                     className="object-cover rounded"
                   />
                 </div>
-                {/* <companyIcon className="w-4 h-4 mr-2" /> */}
                 <span>{company.name}</span>
-                {/* <CommandShortcut>{company._count.companies}</CommandShortcut> */}
               </CommandItem>
             ))}
           </CommandGroup>
@@ -123,7 +122,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                 <CommandShortcut>{category._count.companies}</CommandShortcut>
               </CommandItem>
             ))}
-          </CommandGroup>
+          </CommandGroup> */}
           <CommandGroup heading="Socials">
             {socials?.map((social) => (
               <CommandItem

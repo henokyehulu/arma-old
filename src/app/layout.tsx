@@ -13,7 +13,6 @@ import { extractRouterConfig } from "uploadthing/server";
 
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "sonner";
-import { api } from "@/trpc/server";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,13 +25,11 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const categories = await api.category.index.query();
-  const companies = await api.company.index.query();
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -58,7 +55,7 @@ export default async function RootLayout({
         >
           <Toaster />
           <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
-            <Header categories={categories} companies={companies} />
+            <Header />
             <main className="flex flex-col flex-1 px-4 py-8 pb-20">
               <TRPCReactProvider headers={headers()}>
                 {children}
