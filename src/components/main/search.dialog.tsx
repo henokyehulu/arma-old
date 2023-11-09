@@ -8,8 +8,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/components/ui/command";
-import type { Category, Company } from "@prisma/client";
-import Image from "next/image";
+import type { Category } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import {
@@ -25,11 +24,11 @@ interface SearchDialogProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   links?: LinkProps[];
   socials?: LinkProps[];
-  // categories?: ({
-  //   _count: {
-  //     companies: number;
-  //   };
-  // } & Category)[];
+  categories?: ({
+    _count: {
+      companies: number;
+    };
+  } & Category)[];
   // companies: Company[];
 }
 
@@ -38,7 +37,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
   setOpen,
   links,
   socials,
-  // categories,
+  categories,
   // companies,
 }) => {
   const router = useRouter();
@@ -55,9 +54,9 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
       <Button
         onClick={() => setOpen(true)}
         variant={"secondary"}
-        className="relative flex items-center justify-start w-full gap-2"
+        className="relative flex w-full items-center justify-start gap-2"
       >
-        <SearchIcon className="w-5 h-5" />
+        <SearchIcon className="h-5 w-5" />
         <p className="font-normal text-muted-foreground">Search...</p>
         <kbd className=" pointer-events-none absolute inset-y-0 right-4 my-auto hidden h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono font-medium text-muted-foreground md:inline-flex">
           ⌘ K
@@ -68,25 +67,6 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
         <CommandInput placeholder="Search..." />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Links">
-            {links?.map((link) => (
-              <CommandItem
-                key={link.path}
-                value={link.label}
-                onSelect={() => {
-                  runCommand(() => router.push(link.path));
-                }}
-              >
-                <link.icon className="w-4 h-4 mr-2" />
-                <span>{link.label}</span>
-                {link.isExternalLink ? (
-                  <CommandShortcut>
-                    <ExternalLinkIcon />
-                  </CommandShortcut>
-                ) : null}
-              </CommandItem>
-            ))}
-          </CommandGroup>
           {/* <CommandGroup heading="Companies">
             {companies?.map((company) => (
               <CommandItem
@@ -108,6 +88,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
               </CommandItem>
             ))}
           </CommandGroup>
+          */}
           <CommandGroup heading="Categories">
             {categories?.map((category) => (
               <CommandItem
@@ -117,12 +98,31 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                   runCommand(() => router.push("/categories/" + category.slug));
                 }}
               >
-                <CategoryIcon className="w-4 h-4 mr-2" />
+                <CategoryIcon className="mr-2 h-4 w-4" />
                 <span>{category.name}</span>
                 <CommandShortcut>{category._count.companies}</CommandShortcut>
               </CommandItem>
             ))}
-          </CommandGroup> */}
+          </CommandGroup>
+          <CommandGroup heading="Links">
+            {links?.map((link) => (
+              <CommandItem
+                key={link.path}
+                value={link.label}
+                onSelect={() => {
+                  runCommand(() => router.push(link.path));
+                }}
+              >
+                <link.icon className="mr-2 h-4 w-4" />
+                <span>{link.label}</span>
+                {link.isExternalLink ? (
+                  <CommandShortcut>
+                    <ExternalLinkIcon />
+                  </CommandShortcut>
+                ) : null}
+              </CommandItem>
+            ))}
+          </CommandGroup>
           <CommandGroup heading="Socials">
             {socials?.map((social) => (
               <CommandItem
@@ -132,7 +132,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                   runCommand(() => router.push(social.path));
                 }}
               >
-                <social.icon className="w-4 h-4 mr-2" />
+                <social.icon className="mr-2 h-4 w-4" />
                 <span>{social.label}</span>
                 {social.isExternalLink ? (
                   <CommandShortcut>
