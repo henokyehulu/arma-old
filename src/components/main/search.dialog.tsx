@@ -8,6 +8,7 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/components/ui/command";
+import { pages, socials } from "@/data/links";
 import { themes } from "@/data/themes";
 import type { Category } from "@prisma/client";
 import { useTheme } from "next-themes";
@@ -20,13 +21,10 @@ import {
   PiMagnifyingGlass as SearchIcon,
 } from "react-icons/pi";
 import { Button } from "../ui/button";
-import type { LinkProps } from "./header";
 
 interface SearchDialogProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  links?: LinkProps[];
-  socials?: LinkProps[];
   categories?: ({
     _count: {
       companies: number;
@@ -38,8 +36,6 @@ interface SearchDialogProps {
 const SearchDialog: React.FC<SearchDialogProps> = ({
   open,
   setOpen,
-  links,
-  socials,
   categories,
   // companies,
 }) => {
@@ -116,18 +112,18 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
               </CommandItem>
             ))}
           </CommandGroup>
-          <CommandGroup heading="Links">
-            {links?.map((link) => (
+          <CommandGroup heading="Pages">
+            {pages.map((page) => (
               <CommandItem
-                key={link.path}
-                value={link.label}
+                key={page.path}
+                value={page.label}
                 onSelect={() => {
-                  runCommand(() => router.push(link.path));
+                  runCommand(() => router.push(page.path));
                 }}
               >
-                <link.icon className="mr-2 h-4 w-4" />
-                <span>{link.label}</span>
-                {link.isExternalLink ? (
+                {page.icon && <page.icon className="mr-2 h-4 w-4" />}
+                <span>{page.label}</span>
+                {page.isExternalLink ? (
                   <CommandShortcut>
                     <ExternalLinkIcon />
                   </CommandShortcut>
@@ -150,7 +146,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
             ))}
           </CommandGroup>
           <CommandGroup heading="Socials">
-            {socials?.map((social) => (
+            {socials.map((social) => (
               <CommandItem
                 key={social.path}
                 value={social.label}
@@ -158,7 +154,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                   runCommand(() => router.push(social.path));
                 }}
               >
-                <social.icon className="mr-2 h-4 w-4" />
+                {social.icon && <social.icon className="mr-2 h-4 w-4" />}
                 <span>{social.label}</span>
                 {social.isExternalLink ? (
                   <CommandShortcut>

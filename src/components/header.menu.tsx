@@ -4,7 +4,6 @@ import {
   PiArrowUpRight as ExternalLinkIcon,
   PiList as MenuIcon,
 } from "react-icons/pi";
-import type { LinkProps } from "./main/header";
 import ThemeSubMenu from "./theme.sub-menu";
 import { Button } from "./ui/button";
 import {
@@ -14,13 +13,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { pages, socials } from "@/data/links";
 
-interface HeaderMenuProps {
-  links?: LinkProps[];
-  socials?: LinkProps[];
-}
-
-const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
+const HeaderMenu: React.FC = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,18 +24,18 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end">
-        {links?.map((link) => (
-          <DropdownMenuItem key={link.label} asChild>
+        {pages.map((page) => (
+          <DropdownMenuItem key={page.label} asChild>
             <Link
-              href={link.path}
-              target={link.isExternalLink ? "_blank" : undefined}
+              href={page.path}
+              target={page.isExternalLink ? "_blank" : undefined}
               className="flex min-w-[200px] items-center justify-between"
             >
               <div className="flex items-center">
-                <link.icon className="mr-2 h-5 w-5" />
-                {link.label}
+                {page.icon && <page.icon className="mr-2 h-5 w-5" />}
+                {page.label}
               </div>
-              {link.isExternalLink ? (
+              {page.isExternalLink ? (
                 <ExternalLinkIcon className="ml-2 h-4 w-4" />
               ) : null}
             </Link>
@@ -50,7 +45,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
         <ThemeSubMenu />
         <DropdownMenuSeparator />
         <div className="grid grid-cols-1">
-          {socials?.map((social) => (
+          {socials.map((social) => (
             <DropdownMenuItem key={social.label} asChild>
               <Link
                 href={social.path}
@@ -58,7 +53,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
                 className="flex items-center justify-between"
               >
                 <div className="flex items-center">
-                  <social.icon className="mr-2 h-5 w-5" />
+                  {social.icon && <social.icon className="mr-2 h-5 w-5" />}
                   {social.label}
                 </div>
                 {social.isExternalLink ? (
