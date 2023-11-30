@@ -8,11 +8,14 @@ import {
   CommandList,
   CommandShortcut,
 } from "@/components/ui/command";
+import { themes } from "@/data/themes";
 import type { Category } from "@prisma/client";
+import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import {
   PiSquare as CategoryIcon,
+  PiCheck as CheckIcon,
   PiArrowUpRight as ExternalLinkIcon,
   PiMagnifyingGlass as SearchIcon,
 } from "react-icons/pi";
@@ -40,6 +43,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
   categories,
   // companies,
 }) => {
+  const { theme: currentTheme, setTheme } = useTheme();
   const router = useRouter();
   const runCommand = useCallback(
     (command: () => unknown) => {
@@ -50,17 +54,25 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
   );
 
   return (
-    <div className="flex w-full max-w-md">
+    <div className="flex w-full max-w-md items-center justify-end sm:justify-start">
       <Button
         onClick={() => setOpen(true)}
         variant={"secondary"}
-        className="relative flex w-full items-center justify-start gap-2"
+        className="relative hidden w-full items-center justify-start gap-2 sm:flex"
       >
         <SearchIcon className="h-5 w-5" />
         <p className="font-normal text-muted-foreground">Search...</p>
-        <kbd className=" pointer-events-none absolute inset-y-0 right-4 my-auto hidden h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono font-medium text-muted-foreground md:inline-flex">
+        <kbd className="pointer-events-none absolute inset-y-0 right-4 my-auto hidden h-5 select-none items-center gap-1 rounded border bg-background px-1.5 font-mono font-medium text-muted-foreground md:inline-flex">
           ⌘ K
         </kbd>
+      </Button>
+      <Button
+        onClick={() => setOpen(true)}
+        className="sm:hidden"
+        variant={"ghost"}
+        size={"icon"}
+      >
+        <SearchIcon className="h-4 w-4" />
       </Button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
@@ -123,6 +135,20 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
               </CommandItem>
             ))}
           </CommandGroup>
+          <CommandGroup heading="Theme">
+            {themes.map((theme) => (
+              <CommandItem
+                key={theme.value}
+                onSelect={() => runCommand(() => setTheme(theme.value))}
+              >
+                <theme.icon className="mr-2 h-4 w-4" />
+                {theme.name}
+                <CommandShortcut>
+                  {theme.value === currentTheme && <CheckIcon />}
+                </CommandShortcut>
+              </CommandItem>
+            ))}
+          </CommandGroup>
           <CommandGroup heading="Socials">
             {socials?.map((social) => (
               <CommandItem
@@ -142,20 +168,6 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
               </CommandItem>
             ))}
           </CommandGroup>
-          {/* <CommandGroup heading="Theme">
-            <CommandItem>
-              <PersonIcon className="w-4 h-4 mr-2" />
-              <span>Light</span>
-            </CommandItem>
-            <CommandItem>
-              <EnvelopeClosedIcon className="w-4 h-4 mr-2" />
-              <span>Dark</span>
-            </CommandItem>
-            <CommandItem>
-              <GearIcon className="w-4 h-4 mr-2" />
-              <span>System</span>
-            </CommandItem>
-          </CommandGroup> */}
         </CommandList>
       </CommandDialog>
     </div>

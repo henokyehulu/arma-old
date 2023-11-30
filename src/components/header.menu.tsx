@@ -5,6 +5,7 @@ import {
   PiList as MenuIcon,
 } from "react-icons/pi";
 import type { LinkProps } from "./main/header";
+import ThemeSubMenu from "./theme.sub-menu";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -24,7 +25,7 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant={"ghost"} size={"icon"}>
-          <MenuIcon className="w-5 h-5" />
+          <MenuIcon className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="bottom" align="end">
@@ -36,15 +37,17 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
               className="flex min-w-[200px] items-center justify-between"
             >
               <div className="flex items-center">
-                <link.icon className="w-5 h-5 mr-2" />
+                <link.icon className="mr-2 h-5 w-5" />
                 {link.label}
               </div>
               {link.isExternalLink ? (
-                <ExternalLinkIcon className="w-4 h-4 ml-2" />
+                <ExternalLinkIcon className="ml-2 h-4 w-4" />
               ) : null}
             </Link>
           </DropdownMenuItem>
         ))}
+        <DropdownMenuSeparator />
+        <ThemeSubMenu />
         <DropdownMenuSeparator />
         <div className="grid grid-cols-1">
           {socials?.map((social) => (
@@ -55,11 +58,11 @@ const HeaderMenu: React.FC<HeaderMenuProps> = ({ links, socials }) => {
                 className="flex items-center justify-between"
               >
                 <div className="flex items-center">
-                  <social.icon className="w-5 h-5 mr-2" />
+                  <social.icon className="mr-2 h-5 w-5" />
                   {social.label}
                 </div>
                 {social.isExternalLink ? (
-                  <ExternalLinkIcon className="w-4 h-4 ml-2" />
+                  <ExternalLinkIcon className="ml-2 h-4 w-4" />
                 ) : null}
               </Link>
             </DropdownMenuItem>

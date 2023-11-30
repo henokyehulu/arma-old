@@ -1,10 +1,12 @@
 "use client";
 import { cn } from "@/lib/utils";
+import type { Category } from "@prisma/client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import type { IconType } from "react-icons/lib";
 import {
-  PiSquaresFour as BrowseIcon,
+  PiHouseSimple as BrowseIcon,
+  PiSquaresFour as CategoriesIcon,
   PiFlagBannerDuotone as FlagIcon,
   PiUploadSimple as UploadIcon,
 } from "react-icons/pi";
@@ -13,11 +15,9 @@ import {
   RiTwitterXLine as XIcon,
 } from "react-icons/ri";
 import HeaderMenu from "../header.menu";
-import ModeToggle from "../mode.toggle";
 import { Badge } from "../ui/badge";
 import { buttonVariants } from "../ui/button";
 import SearchDialog from "./search.dialog";
-import type { Category } from "@prisma/client";
 
 export interface LinkProps {
   icon: IconType;
@@ -36,6 +36,11 @@ const links: LinkProps[] = [
     icon: UploadIcon,
     label: "Upload",
     path: "/contribute",
+  },
+  {
+    icon: CategoriesIcon,
+    label: "Categories",
+    path: "/categories",
   },
 ];
 const socials: LinkProps[] = [
@@ -103,10 +108,9 @@ const Header: React.FC<HeaderProps> = ({ categories }) => {
           categories={categories}
         />
       </div>
-      <ModeToggle />
-      <div className="hidden items-center gap-2 md:flex">
-        <HeaderMenu links={links} socials={socials} />
-      </div>
+      {/* <div className="items-center hidden gap-2 md:flex"> */}
+      <HeaderMenu links={links} socials={socials} />
+      {/* </div> */}
     </header>
   );
 };

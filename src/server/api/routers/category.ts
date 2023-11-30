@@ -4,6 +4,33 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 export const categoryRouter = createTRPCRouter({
+  getAllForCategories: publicProcedure.query(({ ctx }) => {
+    return ctx.db.category.findMany({
+      where: { status: "PUBLISHED" },
+      orderBy: {
+        name: "asc",
+      },
+      include: {
+        companies: {
+          select: {
+            logos: {
+              select: {
+                url: true,
+              },
+              take: 1,
+              orderBy: {
+                createdAt: "desc",
+              },
+            },
+          },
+          take: 1,
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+      },
+    });
+  }),
   index: publicProcedure.query(({ ctx }) => {
     return ctx.db.category.findMany({
       where: { status: "PUBLISHED" },

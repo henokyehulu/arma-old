@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const ModeToggle: React.FC = () => {
+const ThemeToggle: React.FC = () => {
   const { setTheme } = useTheme();
   return (
     <DropdownMenu>
@@ -36,4 +36,4 @@ const ModeToggle: React.FC = () => {
   );
 };
 
-export default ModeToggle;
+export default ThemeToggle;

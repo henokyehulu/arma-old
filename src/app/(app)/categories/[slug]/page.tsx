@@ -50,7 +50,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                 "h-fit w-fit p-0",
               )}
             >
-              Company Categories
+              All Categories
             </Link>
             <h1 className="text-4xl font-bold">Browse</h1>
             <span className="mt-6 text-sm font-medium text-muted-foreground">
