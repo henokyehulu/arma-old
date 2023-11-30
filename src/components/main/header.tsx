@@ -80,25 +80,23 @@ const Header: React.FC<HeaderProps> = ({ categories }) => {
     return () => document.removeEventListener("keydown", down);
   }, []);
   return (
-    <header className="sticky top-0 z-20 flex h-14 flex-shrink-0 items-center justify-between gap-4 border-b bg-background/75 px-4 backdrop-blur-lg">
-      <div>
-        <Link
-          href={"/"}
-          className={cn(
-            buttonVariants({ variant: "ghost" }),
-            "p-0 font-semibold hover:bg-transparent",
-          )}
+    <header className="sticky top-0 z-20 flex h-14 flex-shrink-0 items-center justify-between border-b bg-background/75 px-4 backdrop-blur-lg sm:gap-4">
+      <Link
+        href={"/"}
+        className={cn(
+          buttonVariants({ variant: "ghost" }),
+          "p-0 font-semibold hover:bg-transparent",
+        )}
+      >
+        <FlagIcon className="mr-1 h-5 w-5 text-primary" />
+        Arma
+        <Badge
+          variant={"secondary"}
+          className="ml-1 rounded text-xs font-medium"
         >
-          <FlagIcon className="mr-1 h-5 w-5 text-primary" />
-          Arma
-          <Badge
-            variant={"secondary"}
-            className="ml-1 rounded text-xs font-medium"
-          >
-            Alpha
-          </Badge>
-        </Link>
-      </div>
+          Alpha
+        </Badge>
+      </Link>
       <div className="flex flex-1 items-center justify-center">
         <SearchDialog
           open={openSearchDialog}
