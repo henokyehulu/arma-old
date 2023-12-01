@@ -9,6 +9,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { Toaster } from "sonner";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -45,6 +46,7 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           <Toaster />
           <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
