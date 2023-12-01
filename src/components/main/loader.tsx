@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import React from "react";
-import { PiSpinner as LoadingIcon } from "react-icons/pi";
 
 interface LoaderProps {
   className?: string;
@@ -8,7 +7,26 @@ interface LoaderProps {
 
 const Loader: React.FC<LoaderProps> = ({ className }) => {
   return (
-    <LoadingIcon className={cn("h-5 w-5 shrink-0 animate-spin", className)} />
+    <div>
+      <span
+        className={cn(
+          "animate-flash ml-1 inline-block h-1.5 w-1.5 rounded-full bg-muted-foreground",
+          className,
+        )}
+      ></span>
+      <span
+        className={cn(
+          "animate-flash ml-1 inline-block h-1.5 w-1.5 rounded-full bg-muted-foreground [animation-delay:0.2s]",
+          className,
+        )}
+      ></span>
+      <span
+        className={cn(
+          "animate-flash ml-1 inline-block h-1.5 w-1.5 rounded-full bg-muted-foreground [animation-delay:0.4s]",
+          className,
+        )}
+      ></span>
+    </div>
   );
 };
 

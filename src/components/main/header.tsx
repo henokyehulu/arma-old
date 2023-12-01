@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import HeaderMenu from "../header.menu";
 import Logo from "./logo";
 import SearchDialog from "./search.dialog";
+import RequestContentDialog from "./request-content.dialog";
 
 interface HeaderProps {
   categories: ({
@@ -15,6 +16,8 @@ interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> = ({ categories }) => {
   const [openSearchDialog, setOpenSearchDialog] = useState(false);
+  const [openRequestContentDialog, setOpenRequestContentDialog] =
+    useState(false);
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -33,10 +36,15 @@ const Header: React.FC<HeaderProps> = ({ categories }) => {
         <SearchDialog
           open={openSearchDialog}
           setOpen={setOpenSearchDialog}
+          setOpenRequestContentDialog={setOpenRequestContentDialog}
           categories={categories}
         />
       </div>
       <HeaderMenu />
+      <RequestContentDialog
+        open={openRequestContentDialog}
+        setOpen={setOpenRequestContentDialog}
+      />
     </header>
   );
 };

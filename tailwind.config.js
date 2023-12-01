@@ -75,11 +75,17 @@ module.exports = {
           from: { backgroundPosition: "0 0" },
           to: { backgroundPosition: "-200% 0" },
         },
+        flash: {
+          "0%": { opacity: "0.2" },
+          "20%": { opacity: "1" },
+          "100%": { opacity: "0.2" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "text-shimmer": "text-shimmer 2.5s ease-out infinite alternate",
+        flash: "flash 1.4s infinite linear",
       },
     },
   },

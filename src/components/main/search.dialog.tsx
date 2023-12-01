@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback } from "react";
 import {
   PiSquare as CategoryIcon,
+  PiPlusSquare as CategoryAddIcon,
   PiCheck as CheckIcon,
   PiArrowUpRight as ExternalLinkIcon,
   PiMagnifyingGlass as SearchIcon,
@@ -25,6 +26,7 @@ import { Button } from "../ui/button";
 interface SearchDialogProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenRequestContentDialog: React.Dispatch<React.SetStateAction<boolean>>;
   categories?: ({
     _count: {
       companies: number;
@@ -36,6 +38,7 @@ interface SearchDialogProps {
 const SearchDialog: React.FC<SearchDialogProps> = ({
   open,
   setOpen,
+  setOpenRequestContentDialog,
   categories,
   // companies,
 }) => {
@@ -111,6 +114,15 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
                 <CommandShortcut>{category._count.companies}</CommandShortcut>
               </CommandItem>
             ))}
+            <CommandItem
+              onSelect={() => {
+                runCommand(() => setOpenRequestContentDialog(true));
+              }}
+            >
+              <CategoryAddIcon className="mr-2 h-4 w-4" />
+              <span>Add a new category</span>
+              {/* <CommandShortcut>{category._count.companies}</CommandShortcut> */}
+            </CommandItem>
           </CommandGroup>
           <CommandGroup heading="Pages">
             {pages.map((page) => (
