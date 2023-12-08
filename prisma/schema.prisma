@@ -27,37 +27,38 @@ model Company {
     motto      String?
     avatar     String?
     website    String?
+    status     Status    @default(PENDING)
     createdAt  DateTime  @default(now())
     updatedAt  DateTime  @updatedAt
     categoryId String?
-    category   Category? @relation(fields: [categoryId], references: [id])
+    category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
     logos      Logo[]
 
     @@index([categoryId])
 }
 
 model Category {
-    id        String         @id @default(uuid())
-    name      String         @unique
-    slug      String         @unique
-    status    CategoryStatus @default(PENDING)
+    id        String    @id @default(uuid())
+    name      String    @unique
+    slug      String    @unique
+    status    Status    @default(PENDING)
     companies Company[]
-    createdAt DateTime       @default(now())
-    updatedAt DateTime       @updatedAt
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
 }
 
 model Logo {
     id        String   @id @default(uuid())
     url       String
     companyId String
-    company   Company  @relation(fields: [companyId], references: [id])
+    company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@index([companyId])
 }
 
-enum CategoryStatus {
+enum Status {
     PUBLISHED
     PENDING
     PRIVATE

@@ -1,5 +1,5 @@
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { SCreateCategory } from "@/types/form";
+import { CreateCategorySchema } from "@/types";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
@@ -12,6 +12,9 @@ export const categoryRouter = createTRPCRouter({
       },
       include: {
         companies: {
+          where: {
+            status: "PUBLISHED",
+          },
           select: {
             logos: {
               select: {
@@ -38,7 +41,11 @@ export const categoryRouter = createTRPCRouter({
       include: {
         _count: {
           select: {
-            companies: true,
+            companies: {
+              where: {
+                status: "PUBLISHED",
+              },
+            },
           },
         },
       },
@@ -60,16 +67,18 @@ export const categoryRouter = createTRPCRouter({
         },
         include: {
           companies: {
+            where: {
+              status: "PUBLISHED",
+            },
             include: {
               logos: true,
             },
           },
-          _count: true,
         },
       });
     }),
   create: publicProcedure
-    .input(SCreateCategory)
+    .input(CreateCategorySchema)
     .mutation(async ({ input, ctx }) => {
       const category = await ctx.db.category.findUnique({
         where: {
@@ -102,7 +111,7 @@ export const categoryRouter = createTRPCRouter({
         }
       else
         return ctx.db.category.create({
-          data: { ...input },
+          data: input,
         });
     }),
 });

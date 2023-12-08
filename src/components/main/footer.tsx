@@ -5,7 +5,7 @@ import { buttonVariants } from "../ui/button";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="flex flex-col items-center justify-center gap-4 border-t px-4 py-8">
+    <footer className="flex flex-col items-center justify-center gap-4 border-t px-4 py-8 text-center">
       <p className="text-sm text-muted-foreground">
         Crafted by{" "}
         <Link

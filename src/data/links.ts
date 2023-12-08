@@ -2,7 +2,7 @@ import type { IconType } from "react-icons/lib";
 import {
   PiHouseSimple as BrowseIcon,
   PiSquaresFour as CategoriesIcon,
-  PiUploadSimple as UploadIcon,
+  PiListPlus as ContributeIcon,
 } from "react-icons/pi";
 import {
   RiGithubFill as GithubIcon,
@@ -23,8 +23,8 @@ export const pages: LinkProps[] = [
     path: "/",
   },
   {
-    icon: UploadIcon,
-    label: "Upload",
+    icon: ContributeIcon,
+    label: "Contribute",
     path: "/contribute",
   },
   {

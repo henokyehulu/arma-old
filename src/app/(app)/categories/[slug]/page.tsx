@@ -54,7 +54,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
             </Link>
             <h1 className="text-4xl font-bold">Browse</h1>
             <span className="mt-6 text-sm font-medium text-muted-foreground">
-              Showing {category._count.companies} companies
+              Showing {category.companies?.length} companies
             </span>
           </div>
           <div className="grid gap-4 md:grid-cols-2">

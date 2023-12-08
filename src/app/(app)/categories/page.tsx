@@ -17,23 +17,21 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
   return (
     <Link
       href={"/categories/" + category.slug}
-      className="group relative flex aspect-video flex-col overflow-hidden rounded-lg bg-muted transition-colors hover:bg-muted-foreground/10"
+      className="relative flex flex-col overflow-hidden transition-colors border rounded-lg group aspect-video border-border bg-muted hover:bg-muted-foreground/10"
     >
-      <header className="flex h-12 flex-shrink-0 items-center px-4">
-        <h5 className="line-clamp-2 font-medium">{category.name}</h5>
+      <header className="flex items-center flex-shrink-0 h-12 px-4">
+        <h5 className="font-medium line-clamp-2">{category.name}</h5>
       </header>
       <main className="relative flex-1">
-        <div className="absolute -bottom-2 right-0 h-full w-1/2 rounded-tl-lg bg-white transition-all group-hover:bottom-0">
-          <div className="relative h-full w-full rounded-tl-lg">
-            {category.companies[0]?.logos[0]?.url ? (
+        <div className="absolute right-0 w-1/2 h-full transition-all rounded-tl-lg -bottom-2 bg-background group-hover:bottom-0">
+          <div className="relative flex items-center justify-center w-full h-full overflow-hidden rounded-tl-lg">
+            {category.companies[0]?.logos[0]?.url && (
               <Image
                 src={category.companies[0].logos[0].url}
                 fill
                 alt="logo"
-                className="rounded-tl-lg object-cover"
+                className="object-cover rounded-tl-lg"
               />
-            ) : (
-              <h1>{category.name.slice(0, 1)}</h1>
             )}
           </div>
         </div>

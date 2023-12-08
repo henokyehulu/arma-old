@@ -26,7 +26,6 @@ import { Button } from "../ui/button";
 interface SearchDialogProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setOpenRequestContentDialog: React.Dispatch<React.SetStateAction<boolean>>;
   categories?: ({
     _count: {
       companies: number;
@@ -38,7 +37,6 @@ interface SearchDialogProps {
 const SearchDialog: React.FC<SearchDialogProps> = ({
   open,
   setOpen,
-  setOpenRequestContentDialog,
   categories,
   // companies,
 }) => {
@@ -116,7 +114,7 @@ const SearchDialog: React.FC<SearchDialogProps> = ({
             ))}
             <CommandItem
               onSelect={() => {
-                runCommand(() => setOpenRequestContentDialog(true));
+                runCommand(() => router.push("/contribute?tab=category"));
               }}
             >
               <CategoryAddIcon className="mr-2 h-4 w-4" />

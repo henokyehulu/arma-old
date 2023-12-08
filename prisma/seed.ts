@@ -31,6 +31,7 @@ async function main() {
     },
     update: {},
     create: {
+      status: "PUBLISHED",
       website: "https://remote.com/",
       avatar:
         "https://upcdn.io/FW25bBB/image/content/app_logos/3296e20f-e44e-4e19-91b0-6d079c92a2ee.png",
@@ -62,6 +63,7 @@ async function main() {
     },
     update: {},
     create: {
+      status: "PUBLISHED",
       website: "https://fibery.io/",
       avatar:
         "https://upcdn.io/FW25bBB/image/content/app_logos/adbf9012-beee-4df8-a7bd-90a01a0175ac.png",
@@ -93,6 +95,7 @@ async function main() {
     },
     update: {},
     create: {
+      status: "PUBLISHED",
       website: "https://www.circle.so/",
       avatar:
         "https://upcdn.io/FW25bBB/image/content/app_logos/3e35c9ce-9771-4b55-a896-018f95d8d751.png",
@@ -124,6 +127,7 @@ async function main() {
     },
     update: {},
     create: {
+      status: "PUBLISHED",
       website: "https://bard.google.com",
       avatar:
         "https://upcdn.io/FW25bBB/image/content/app_logos/fb9b2738-d6c8-4e28-902a-2f17349e5256.png",

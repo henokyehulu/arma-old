@@ -10,9 +10,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = async ({ children }) => {
   const categories = await api.category.index.query();
   return (
-    <div className="mx-auto flex min-h-screen max-w-6xl flex-col border-x">
+    <div className="flex flex-col max-w-6xl min-h-screen mx-auto border-x">
       <Header categories={categories} />
-      <main className="flex flex-1 flex-col px-4 py-8 pb-20">{children}</main>
+      <main className="flex flex-col flex-1 px-4 py-8 pb-20">{children}</main>
       <Footer />
     </div>
   );

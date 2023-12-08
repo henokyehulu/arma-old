@@ -19,7 +19,7 @@ interface PageProps {
 
 const Page: NextPage<PageProps> = async ({ params }) => {
   const company = await api.company.show.query({ id: params.id });
-  if (!company) notFound();
+  if (!company || company.status !== "PUBLISHED") notFound();
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col gap-8 pb-4">

@@ -1,13 +1,38 @@
+"use client";
+import CreateCategoryForm from "@/components/forms/create-category.form";
+import CreateCompanyForm from "@/components/forms/create-company.form";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-// import { UploadDropzone } from "@/utils/uploadthing";
+import { buttonVariants } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 import type { NextPage } from "next";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { PiArrowDown as DownIcon } from "react-icons/pi";
-import CategorySelect from "./_components/category.select";
+
+interface TabProps {
+  name: string;
+  value: string;
+  children?: React.ReactNode;
+}
+
+const tabs: TabProps[] = [
+  {
+    name: "Company",
+    value: "company",
+    children: <CreateCompanyForm />,
+  },
+  {
+    name: "Category",
+    value: "category",
+    children: <CreateCategoryForm />,
+  },
+];
 
 const Page: NextPage = () => {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+
   return (
     <div className="flex flex-col gap-12">
       <div className="flex flex-col items-center justify-center gap-8 text-center">
@@ -23,53 +48,44 @@ const Page: NextPage = () => {
         <span className="text-xs">
           &apos; Sry for that dead ahh joke &apos;
         </span>
-        <Button variant={"outline"} size={"icon"}>
+        <Link
+          href={"#forms"}
+          className={cn(buttonVariants({ variant: "outline", size: "icon" }))}
+        >
           <DownIcon className="h-5 w-5" />
-        </Button>
+        </Link>
         {/* <Button size={"lg"}>Upload logos</Button> */}
       </div>
-      <form className="mx-auto flex w-full max-w-xl flex-col gap-4 rounded-lg p-8">
-        <div className="space-y-2">
-          <Label htmlFor="category">Company category</Label>
-          <CategorySelect />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="name">Company name</Label>
-          <Input id="name" placeholder="Eg. Awash Bank" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="legalName">Company legal name</Label>
-          <Input id="legalName" placeholder="Eg. Awash Bank S.C." />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="motto">Company motto</Label>
-          <Input id="motto" placeholder="Eg. Nurturing like the river" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="avatar">Company avatar</Label>
-          <Input id="avatar" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="website">Company website</Label>
-          <Input id="website" placeholder="https://awashbank.com" />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="logos">Company logos</Label>
-          {/* <UploadDropzone
-            endpoint="imageUploader"
-            onClientUploadComplete={(res) => {
-              // Do something with the response
-              console.log("Files: ", res);
-              alert("Upload Completed");
-            }}
-            onUploadError={(error: Error) => {
-              // Do something with the error.
-              alert(`ERROR! ${error.message}`);
-            }}
-          /> */}
-        </div>
-        <Button>Submit for review</Button>
-      </form>
+      <Tabs
+        id="forms"
+        defaultValue={
+          tabParam &&
+          tabs
+            .map((tab) => tab.value.toLowerCase())
+            .includes(tabParam.toLowerCase())
+            ? tabParam
+            : tabs[0]?.value
+        }
+        className="mx-auto w-full max-w-sm space-y-8"
+      >
+        <TabsList
+          className="grid"
+          style={{
+            gridTemplateColumns: `repeat(${tabs.length}, minmax(0, 1fr))`,
+          }}
+        >
+          {tabs.map((tab) => (
+            <TabsTrigger key={tab.value} value={tab.value}>
+              {tab.name}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {tabs.map((tab) => (
+          <TabsContent key={tab.value} value={tab.value}>
+            {tab.children}
+          </TabsContent>
+        ))}
+      </Tabs>
     </div>
   );
 };
